@@ -61,9 +61,6 @@ public class GroupManagerApp extends JFrame
     public GroupManagerApp()
     {
         setTitle("Zarządzanie grupami osób");
-        addButtons();
-        setMenuBar();
-        viewGroupList.refreshView();
         pack();
         setLocationRelativeTo(null);
         setSize(600, 600);
@@ -99,6 +96,9 @@ public class GroupManagerApp extends JFrame
             e.getMessage();
         }
 
+        addButtons();
+        setMenuBar();
+        viewGroupList.refreshView();
         setVisible(true);
     }
 

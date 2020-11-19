@@ -331,9 +331,7 @@ public class GroupOfMaps implements Iterable<Map>, Serializable
             e.getMessage();
         }
     }
-
-
-
+    
     @Override
     public Iterator<Map> iterator()
     {

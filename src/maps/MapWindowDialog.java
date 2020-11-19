@@ -38,17 +38,18 @@ public class MapWindowDialog extends JDialog
     {
         super(parent, Dialog.ModalityType.DOCUMENT_MODAL);
         mapApp = (MapWindowApp)parent;
-        initComponents(map);
         if(map != null)
             this.map = map;
+        initComponents(map);
     }
 
     MapWindowDialog(GroupOfMapsWindowDialog parent, Map map)
     {
         super(parent, Dialog.ModalityType.DOCUMENT_MODAL);
-        initComponents(map);
         if(map != null)
             this.map = map;
+        initComponents(map);
+
     }
 
     private void initComponents(Map map)
@@ -140,6 +141,11 @@ public class MapWindowDialog extends JDialog
 
 
     public static void changeMapData(Window parent, Map map)
+    {
+        new MapWindowDialog(parent, map);
+    }
+
+    public static void changeMapData(GroupOfMapsWindowDialog parent, Map map)
     {
         new MapWindowDialog(parent, map);
     }
