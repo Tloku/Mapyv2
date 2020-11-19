@@ -9,22 +9,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Zawartość: Klasa GroupOfMapsWindowDialog i ViewGroupOfMaps
+ * Autor: Dominik Tłokiński
+ * Nr indeksu: 252689
+ * Data: listopad 2020 r.
+ */
+
 public class GroupOfMapsWindowDialog extends JDialog
 {
 
     private final String DEFAULT_NAME = "Nazwa domyslna";
 
-
     JLabel groupNameLabel = new JLabel("Nazwa grupy");
     JLabel groupTypeLabel = new JLabel("Typ grupy");
-    JTextField groupNameTextField = new JTextField("");
-    JTextField groupTypeTextField = new JTextField("");
+    JTextField groupNameTextField = new JTextField(10);
+    JTextField groupTypeTextField = new JTextField(10);
 
     JButton newMapButton = new JButton("Dodaj nową mapę");
     JButton modifyMapButton = new JButton("Modyfikuj mapę");
     JButton deleteMapButton = new JButton("Usuń mapę");
     JButton saveToFileButton = new JButton("Zapisz do pliku");
-    JButton readFromFileButton = new JButton("Wczytaj osobę z pliku");
+    JButton readFromFileButton = new JButton("Wczytaj z pliku");
 
     private GroupOfMaps currentGroup;
     JPanel panel = new JPanel();
@@ -57,15 +63,13 @@ public class GroupOfMapsWindowDialog extends JDialog
         {
             GroupOfMaps currentGroup = new GroupOfMaps("Grupa testowa", GroupType.VECTOR);
             currentGroup.addToGroupCollection(new Map("przykład", "20", "20", "14.3"));
-
             new GroupOfMapsWindowDialog(null, currentGroup);
         }
         catch (MapException e)
         {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
-
 
     public GroupOfMapsWindowDialog(Window parent, GroupOfMaps iterator)
     {

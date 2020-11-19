@@ -267,6 +267,17 @@ public class Map implements Serializable, Comparable
     }
 
     @Override
+    public int hashCode()
+    {
+        return 1;
+    }
+
+    public boolean equals()
+    {
+        return true;
+    }
+
+    @Override
     public int compareTo(Object o) {
         return 0;
     }

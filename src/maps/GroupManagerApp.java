@@ -3,13 +3,23 @@ package maps;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Zawartość: Klasa GroupManagerApp i ViewGroupList
+ * Autor: Dominik Tłokiński
+ * Nr indeksu: 252689
+ * Data: listopad 2020 r.
+ */
+
 public class GroupManagerApp extends JFrame
 {
+    private static final String ALL_GROUPS_FILE = "Lista_grup.bin";
     private static final String GREETING_MESSAGE =
             "Program do zarządzania grupami osób - wersja okienkowa\n\n" +
                     "Autor: Dominik Tłokiński\n" +
@@ -53,20 +63,48 @@ public class GroupManagerApp extends JFrame
         setTitle("Zarządzanie grupami osób");
         addButtons();
         setMenuBar();
-
+        viewGroupList.refreshView();
         pack();
         setLocationRelativeTo(null);
         setSize(600, 600);
         setResizable(false);
         setDefaultCloseOperation(3);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                windowClosed(e);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                try
+                {
+                    saveGroupListToFile(ALL_GROUPS_FILE);
+                    JOptionPane.showMessageDialog(null, "Dane zostały zapisane do pliku: " + ALL_GROUPS_FILE);
+                }
+                catch (MapException ex) {
+                    ex.getMessage();
+                }
+            }
+        });
+
+        try
+        {
+            loadGroupListFromFile();
+            JOptionPane.showMessageDialog(null, "Dane zostały wczytane z pliku " + ALL_GROUPS_FILE);
+        }
+        catch (MapException e)
+        {
+            e.getMessage();
+        }
+
         setVisible(true);
     }
 
     private void addButtons()
     {
         viewGroupList = new ViewGroupList(currentList, 400, 250);
-        viewGroupList.refreshView();
-
         GroupLayout layout = new GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
 
@@ -102,7 +140,6 @@ public class GroupManagerApp extends JFrame
                         )
 
         );
-
 
         newGroupButton.addActionListener(e -> {
             try {
@@ -257,7 +294,7 @@ public class GroupManagerApp extends JFrame
 
     void loadGroupListFromFile() throws MapException
     {
-        try(ObjectInputStream inS = new ObjectInputStream(new FileInputStream("ZapiszGrupy.txt")))
+        try(ObjectInputStream inS = new ObjectInputStream(new FileInputStream(ALL_GROUPS_FILE)))
         {
             currentList = (List<GroupOfMaps>)inS.readObject();
         }
@@ -269,9 +306,9 @@ public class GroupManagerApp extends JFrame
         }
     }
 
-    void saveGroupListToFile() throws MapException
+    void saveGroupListToFile(String allGroupsFile) throws MapException
     {
-        try(ObjectOutputStream outS = new ObjectOutputStream(new FileOutputStream("ZapiszGrupy.txt")))
+        try(ObjectOutputStream outS = new ObjectOutputStream(new FileOutputStream(allGroupsFile)))
         {
             outS.writeObject(currentList);
         }
