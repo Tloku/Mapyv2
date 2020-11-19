@@ -43,6 +43,14 @@ public class MapWindowDialog extends JDialog
             this.map = map;
     }
 
+    MapWindowDialog(GroupOfMapsWindowDialog parent, Map map)
+    {
+        super(parent, Dialog.ModalityType.DOCUMENT_MODAL);
+        initComponents(map);
+        if(map != null)
+            this.map = map;
+    }
+
     private void initComponents(Map map)
     {
         if(map == null)
@@ -124,6 +132,13 @@ public class MapWindowDialog extends JDialog
        return dialog.map;
     }
 
+    public static Map createNewMap(GroupOfMapsWindowDialog parent)
+    {
+        MapWindowDialog dialog = new MapWindowDialog(parent, null);
+        return dialog.map;
+    }
+
+
     public static void changeMapData(Window parent, Map map)
     {
         new MapWindowDialog(parent, map);
@@ -143,7 +158,8 @@ public class MapWindowDialog extends JDialog
             map.setScale((Scale) mapScaleJBox.getSelectedItem());
             map.setPublisher((Publisher) mapPublisherJBox.getSelectedItem());
 
-            mapApp.currentMap = map;
+            if(mapApp != null)
+                mapApp.currentMap = map;
 
             MapWindowApp.setTextFields(map);
 

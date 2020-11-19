@@ -123,6 +123,7 @@ public class GroupOfMapsWindowDialog extends JDialog
 
     private void initComponents(GroupOfMaps group)
     {
+        setTitle("Modyfikacja grupy");
         this.currentGroup = group;
         setPanelAndButtons();
         setBars();
@@ -228,6 +229,8 @@ public class GroupOfMapsWindowDialog extends JDialog
         Map newMap = MapWindowDialog.createNewMap(this);
         if(newMap != null)
             currentGroup.addToGroupCollection(newMap);
+
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void addModifyMapActionListener()
@@ -241,6 +244,7 @@ public class GroupOfMapsWindowDialog extends JDialog
 
             MapWindowDialog.changeMapData(this, (Map)iterator.next());
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void deleteMapActionListener()
@@ -253,6 +257,7 @@ public class GroupOfMapsWindowDialog extends JDialog
 
             iterator.remove();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void saveToFileActionListener()
@@ -272,6 +277,7 @@ public class GroupOfMapsWindowDialog extends JDialog
                 ex.getMessage();
             }
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void readFromFileActionListener()
@@ -284,6 +290,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
 
@@ -295,6 +302,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         catch (MapException ex) {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void sortByMapHeightActionListener()
@@ -305,6 +313,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         catch (MapException ex) {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void sortByMapWidthActionListener()
@@ -315,6 +324,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         catch (MapException ex) {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void sortByMapPrizeActionListener()
@@ -325,6 +335,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         catch (MapException ex) {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void sortByMapPublisherActionListener()
@@ -335,6 +346,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         catch (MapException ex) {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void sortByMapScaleActionListener()
@@ -345,6 +357,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         catch (MapException ex) {
             ex.getMessage();
         }
+        this.viewGroupOfMaps.refreshView();
     }
 
     private void changeGroupNameActionListener() throws MapException {
@@ -375,6 +388,7 @@ public class GroupOfMapsWindowDialog extends JDialog
         groupTypeTextField.setText(type.toString());
     }
 }
+
 
 class ViewGroupOfMaps extends JScrollPane
 {

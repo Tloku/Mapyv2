@@ -157,7 +157,12 @@ public class GroupOfMaps implements Iterable<Map>, Serializable
         if(groupType == GroupType.HASH_SET || groupType == GroupType.TREE_SET)
             throw new MapException("Kolekcje typu Set nie mogą być sortowane");
 
-        Collections.sort((List<Map>)groupCollection);
+        Collections.sort((List<Map>) groupCollection, new Comparator<Map>() {
+            @Override
+            public int compare(Map o1, Map o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
     }
 
     public void sortByMapHeight() throws MapException

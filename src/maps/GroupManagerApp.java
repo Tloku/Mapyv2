@@ -195,6 +195,7 @@ public class GroupManagerApp extends JFrame
         GroupOfMaps group = GroupOfMapsWindowDialog.createNewGroupOfMaps(this);
         if(group != null)
             currentList.add(group);
+        this.viewGroupList.refreshView();
     }
 
     public void modifyGroupActionListener()
@@ -208,6 +209,7 @@ public class GroupManagerApp extends JFrame
 
            new GroupOfMapsWindowDialog(this, iterator.next());
         }
+        this.viewGroupList.refreshView();
     }
 
     public void deleteGroupActionListener()
@@ -221,6 +223,7 @@ public class GroupManagerApp extends JFrame
 
             iterator.remove();
         }
+        this.viewGroupList.refreshView();
     }
 
     public void saveToFileActionListener()
@@ -240,6 +243,7 @@ public class GroupManagerApp extends JFrame
                 JOptionPane.showMessageDialog(rootPane, "Nie udało się zapisać do pliku");
             }
         }
+        this.viewGroupList.refreshView();
     }
 
     public void readFromFileActionListener()
@@ -253,6 +257,7 @@ public class GroupManagerApp extends JFrame
         {
             JOptionPane.showMessageDialog(rootPane, "Nie udało się odczytać z pliku");
         }
+        this.viewGroupList.refreshView();
     }
 
     public void saveToBinaryActionListener()
@@ -272,6 +277,7 @@ public class GroupManagerApp extends JFrame
                 JOptionPane.showMessageDialog(rootPane, "Nie udało się zapisać do pliku");
             }
         }
+        this.viewGroupList.refreshView();
     }
 
     public void readFromBinaryActionListener()
@@ -285,6 +291,7 @@ public class GroupManagerApp extends JFrame
         {
             JOptionPane.showMessageDialog(rootPane, "Nie udało się odczytać z pliku");
         }
+        this.viewGroupList.refreshView();
     }
 
     private void aboutMeActionListener()
